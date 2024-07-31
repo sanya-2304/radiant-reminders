@@ -7,7 +7,7 @@
   const cron = require('node-cron');
   const PORT=process.env.PORT || 2000
 
-  mongoose.connect('mongodb://localhost:27017/nodemailer-app-backend')
+  mongoose.connect(process.env.DB_URL)
     .then(() => {
       console.log('Connected to MongoDB');
     })
@@ -28,4 +28,4 @@
   app.listen(PORT, () => console.log('Server is listening on port 2000'));
 
   // Schedule task to send daily quotes at 11:50 AM every day
-  cron.schedule('0 8 * * *', sendDailyQuotesEmail);
+  cron.schedule('00 08 * * *', sendDailyQuotesEmail);
