@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">  
+  <title>Home</title>
+  <style>
+    body{
+      height: 100vh;
+      background-color: #0c4871;
+    }
+    .cont {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 87.5vh;
+      margin: 0;
+      background-color: #0c4871;
+      color: aliceblue;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #3498db; 
+      color: aliceblue;
+      font-weight: 700;
+      width: 80%;
+      max-width: 600px;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin: 20px 0;
+      text-align: center;
+      padding-top: 10px;
+    }
+    .quote {
+      margin-top: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0a3b57;
+      color: aliceblue;
+      width: 100%;
+    }
+    footer a {
+      color: aliceblue;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    #refresh-quote{
+      background-color: #0c4871;
+    }
+  </style>
+</head>
+<body><div class="cont">
+  <h1>Welcome to Radiant Reminders!</h1>
+  <sub style="padding-top: 10px; padding-bottom: 15px;">Thank you for subscribing! Now, you'll get positive reminders daily on your registered mail id.</sub> 
+  <div class="container">
+    <div class="quote">
+      <h4><strong style="margin: 15px;">Quote of the Day: </strong><p id="quote"><%= quote %></p></h4>
+      <button class="btn btn-primary" id="refresh-quote" >Refresh Quote</button>
+    </div>
+  </div>
+</div>
+  <footer>
+    <p> <b>Contact us- </b> <a href="mailto:sanyaadoda@gmail.com" target="_blank">sanyaadoda@gmail.com</a> | <a href="https://www.linkedin.com/in/sanya-doda-774241216/" target="_blank">LinkedIn</a> | <a href="https://github.com/sanya-2304" target="_blank">Github</a> | All rights reserved 2024</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    document.getElementById('refresh-quote').addEventListener('click', async()=>{
+      try {
+        const response=await fetch('/new-quote')
+        const data=await response.json()
+        document.getElementById('quote').innerText=data.quote;
+      }catch(err){
+        console.error('Error fetching new quote:', err)
+      }
+    })
+  </script>
+</body>
+
+</html>
